@@ -3,8 +3,10 @@ CONTAINER_NAME=ldelossa/ebpf-compiler
 CONTAINER_VERSION = 0.0.2
 CONTAINER_TAG = $(CONTAINER_NAME):$(CONTAINER_VERSION)
 CONTAINER_INSTANCE=ebpf-compiler-$(RANDOM)
+USER = $(shell whoami)
 UID = $(shell id -u)
-MNT_PATH=/var/run/user/$(UID)
+GID = $(shell id -g)
+MNT_PATH ?= $($HOME)
 SYS_PATH=/sys
 
 .PHONY: ebpf-compiler run
@@ -20,7 +22,12 @@ ebpf-compiler:
 run:
 	$(build_if_required)
 	container_instance=ebpf-compiler-$RANDOM
-	mkdir -p $(MNT_PATH)/$(CONTAINER_INSTANCE)
-	docker run -it --privileged --rm -v $(MNT_PATH):/mnt -v $(SYS_PATH):$(SYS_PATH) $(CONTAINER_TAG) 
-	rm -rf $(MNT_PATH)
-
+	docker run -it --privileged --rm \
+		-v $(SYS_PATH):$(SYS_PATH) \
+		-v /etc/group:/etc/group:ro \
+		-v /etc/passwd:/etc/passwd:ro \
+		-v /etc/shadow:/etc/shadow:ro \
+		-v /home/$(USER):/home/$(USER) \
+		--workdir /home/$(USER) \
+		--user $(UID):$(GID) \
+		 $(CONTAINER_TAG) 

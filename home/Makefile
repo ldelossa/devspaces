@@ -15,4 +15,5 @@ endef
 
 .PHONY $(CONTAINER_NAME):
 	docker build --build-arg version_id=$(FEDORA_VERSION_ID) -t $(CONTAINER_TAG) .
+	docker tag $(CONTAINER_TAG) $(CONTAINER_REPO)/$(CONTAINER_NAME):latest
 

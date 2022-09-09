@@ -1,17 +1,15 @@
 ARG version_id=36
 FROM fedora:$version_id
 
-RUN dnf install -y alacritty asciinema bat bear brightnessctl \
+RUN dnf install -y bat bear \
     clang clang-tools-extra docker-compose exa fd-find \
-    fuse-sshfs fzf grim htop jq neovim nmap moby-engine \
-    pavucontrol powertop pv slurp swappy sway the_silver_searcher \
-    waybar wob xdg-desktop-portal-wlr zsh gh rust libnotify-devel \
-    pam-devel gtk3-devel gtk-layer-shell-devel nodejs-bash-language-server \
-    nnn scdoc meson libxkbcommon-x11-devel xcb-util-devel \
-    xcb-util-wm-devel xcb-util-cursor-devel wayland-protocols-devel flex \
-    bison procs kubernetes-client helm npm bluez startup-notification-devel \
-    libnl3-devel libmpdclient-devel grimshot blueman llvm  \
-    gdb kitty elfutils-libelf-devel openssl-devel dwarves zstd 
+    fuse-sshfs fzf htop jq neovim nmap moby-engine \
+    the_silver_searcher \
+    zsh gh rust \
+    nodejs-bash-language-server \
+    nnn scdoc meson flex \
+    bison procs kubernetes-client helm npm \
+    llvm gdb elfutils-libelf-devel openssl-devel dwarves zstd 
 
 RUN git clone https://github.com/ldelossa/dotfiles.git ~/git/dotfiles; \
     cd ~/git/dotfiles; make link-configs; \
