@@ -1,9 +1,9 @@
 ARG version_id=36
 FROM fedora:$version_id
 
-RUN dnf install -y bat bear \
-    clang clang-tools-extra docker-compose exa fd-find \
-    fuse-sshfs fzf htop jq neovim nmap moby-engine \
+RUN dnf install -y bat bear iproute kitty \
+    clang clang-tools-extra exa fd-find \
+    fuse-sshfs fzf htop jq neovim nmap \
     the_silver_searcher \
     zsh gh rust \
     nodejs-bash-language-server \
@@ -11,13 +11,11 @@ RUN dnf install -y bat bear \
     bison procs kubernetes-client helm npm \
     llvm gdb elfutils-libelf-devel openssl-devel dwarves zstd 
 
-RUN git clone https://github.com/ldelossa/dotfiles.git ~/git/dotfiles; \
-    cd ~/git/dotfiles; make link-configs; \
-    make link-zsh; \
-    make link-gdb-config
-
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; \
     ~/.fzf/install
+
+RUN git clone https://github.com/ldelossa/dotfiles.git ~/git/dotfiles; \
+    cd ~/git/dotfiles; make all; 
 
 RUN git clone --recursive https://github.com/changs/slimzsh.git ~/.slimzsh
 
@@ -39,8 +37,6 @@ RUN cd ~/git/lua; \
 RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-# RUN nvim +'PlugInstall --sync' +qall &> /dev/null | true
-# RUN nvim +'TSInstall all --sync' +qall &> /dev/null | true
-# RUN nvim +'GoInstallBinaries --sync' +qall &> /dev/null | true
+RUN echo 'louis ALL=(ALL:ALL) ALL' >> /etc/sudoers
 
-ENTRYPOINT zsh
+ENTRYPOINT /usr/bin/zsh

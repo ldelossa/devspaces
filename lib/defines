@@ -1,0 +1,16 @@
+USER = $(shell whoami)
+UID = $(shell id -u)
+GID = $(shell id -g)
+HOME_PATH = $(shell echo $$HOME)
+SYS_PATH = /sys
+
+REPO_NAME = devspace
+# CONTAINER_NAME defined in devspace specific makefile.
+REPO_CONTAINER_NAME = $(REPO_NAME)/$(CONTAINER_NAME)
+# CONTAINER_VERSION defined in devspace specific makefile.
+CONTAINER_TAG = $(REPO_CONTAINER_NAME):$(CONTAINER_VERSION)
+
+define BUILD_IF_REQUIRED
+	$(shell docker inspect $(CONTAINER_TAG) > /dev/null)
+	$(if $(filter $(.SHELLSTATUS), 0),,make $(CONTAINER_NAME))
+endef
