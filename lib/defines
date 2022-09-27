@@ -1,3 +1,4 @@
+FEDORA_VERSION_ID = 36
 USER = $(shell whoami)
 UID = $(shell id -u)
 GID = $(shell id -g)
@@ -10,7 +11,14 @@ REPO_CONTAINER_NAME = $(REPO_NAME)/$(CONTAINER_NAME)
 # CONTAINER_VERSION defined in devspace specific makefile.
 CONTAINER_TAG = $(REPO_CONTAINER_NAME):$(CONTAINER_VERSION)
 
-define BUILD_IF_REQUIRED
+define LIB_BUILD_IF_REQUIRED
 	$(shell docker inspect $(CONTAINER_TAG) > /dev/null)
 	$(if $(filter $(.SHELLSTATUS), 0),,make $(CONTAINER_NAME))
 endef
+
+define LIB_BUILD_CONTAINER 
+docker build --build-arg version_id=$(FEDORA_VERSION_ID) -t $(CONTAINER_TAG) .
+docker tag $(CONTAINER_TAG) $(REPO_CONTAINER_NAME)
+endef 
+
+
