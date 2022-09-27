@@ -1,14 +1,12 @@
 include ../lib/defines
 
-FEDORA_VERSION_ID = 36
 CONTAINER_NAME = ebpf
-CONTAINER_VERSION = 0.0.3
+CONTAINER_VERSION = 0.0.5
 
 .PHONY: $(CONTAINER_NAME) run
 
 $(CONTAINER_NAME):
-	docker build --build-arg version_id=$(FEDORA_VERSION_ID) -t $(CONTAINER_TAG) .
-	docker tag $(CONTAINER_TAG) $(REPO_CONTAINER_NAME)
+	$(LIB_BUILD_CONTAINER)
 
 .SILENT:
 run:
@@ -22,7 +20,5 @@ run:
 		-v $(HOME_PATH):$(HOME_PATH) \
 		--user $(UID):$(GID) \
 		--name $(CONTAINER_NAME) \
-		--entrypoint "sleep" \
-		 $(CONTAINER_TAG) \
-		 "infinity" 2>/dev/null
+		 $(CONTAINER_TAG) 
 	docker exec -it -w $(HOME_PATH)/git/ebpf $(CONTAINER_NAME) zsh
