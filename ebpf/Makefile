@@ -1,7 +1,8 @@
 include ../lib/defines
 
 CONTAINER_NAME = ebpf
-CONTAINER_VERSION = 0.0.5
+CONTAINER_VERSION = 0.0.1
+EBF_DIR = $(HOME_PATH)/git/ebpf
 
 .PHONY: $(CONTAINER_NAME) run
 
@@ -12,7 +13,8 @@ $(CONTAINER_NAME):
 run:
 	$(LIB_BUILD_IF_REQUIRED)
 	# allow fail, you'll just attach next to the running container.
-	-docker run -d --privileged \
+	-$(RUNTIME) run -d --privileged \
+		-l devspace \
 		-v $(SYS_PATH):$(SYS_PATH) \
 		-v /etc/group:/etc/group:ro \
 		-v /etc/passwd:/etc/passwd:ro \
@@ -21,4 +23,4 @@ run:
 		--user $(UID):$(GID) \
 		--name $(CONTAINER_NAME) \
 		 $(CONTAINER_TAG) 2> /dev/null
-	docker exec -it -w $(HOME_PATH)/git/ebpf $(CONTAINER_NAME) zsh
+	$(RUNTIME) exec -it -w $(EBF_DIR) $(CONTAINER_NAME) zsh

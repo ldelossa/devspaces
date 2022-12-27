@@ -2,7 +2,8 @@ include ../lib/defines
 
 FEDORA_VERSION_ID = 36
 CONTAINER_NAME = frr
-CONTAINER_VERSION = 0.0.6
+CONTAINER_VERSION = 0.0.1
+FRR_SRC = $(HOME_PATH)/git/c/frr
 
 .PHONY: run
 
@@ -13,7 +14,8 @@ $(CONTAINER_NAME):
 run:
 	$(LIB_BUILD_IF_REQUIRED)
 	# allow fail, you'll just attach next to the running container.
-	-docker run -d --privileged \
+	-$(RUNTIME) run -d --privileged \
+		-l devspace \
 		-v $(SYS_PATH):$(SYS_PATH) \
 		-v /etc/group:/etc/group:ro \
 		-v /etc/passwd:/etc/passwd:ro \
@@ -22,5 +24,5 @@ run:
 		--user $(UID):$(GID) \
 		--name $(CONTAINER_NAME) \
 		 $(CONTAINER_TAG) 
-	docker exec -it -w $(HOME_PATH)/git/c/frr $(CONTAINER_NAME) zsh
+	$(RUNTIME) exec -it -w $(FRR_SRC) $(CONTAINER_NAME) zsh
 

@@ -3,5 +3,5 @@ CONTAINER_NAME=waybar
 CONTAINER_VERSION = 0.0.1
 
 .PHONY $(CONTAINER_NAME):
-	docker build --build-arg version_id=$(FEDORA_VERSION_ID) -t $(CONTAINER_TAG) .
+	$(LIB_BUILD_CONTAINER)
 

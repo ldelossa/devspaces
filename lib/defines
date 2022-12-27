@@ -4,6 +4,7 @@ UID = $(shell id -u)
 GID = $(shell id -g)
 HOME_PATH = $(shell echo $$HOME)
 SYS_PATH = /sys
+RUNTIME = docker
 
 REPO_NAME = devspace
 # CONTAINER_NAME defined in devspace specific makefile.
