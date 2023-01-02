@@ -1,5 +1,4 @@
-ARG version_id=36
-FROM fedora:$version_id
+FROM devspace/home:latest
 
 RUN dnf install -y \
   clang-tools-extra \
@@ -27,5 +26,10 @@ RUN dnf install -y \
   cmake \
   meson \
   scdoc \
-  wayland-protocols-devel
+  wayland-protocols-devel \
+  systemd-devel
 
+RUN mkfifo /var/run/pause; chmod 777 /var/run/pause
+
+ENTRYPOINT ["zsh"]
+CMD ["-c", "echo ' ' > /var/run/pause"]

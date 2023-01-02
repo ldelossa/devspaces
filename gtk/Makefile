@@ -1,8 +1,8 @@
 include ../lib/defines
 
-CONTAINER_NAME = home
+CONTAINER_NAME = gtk
 CONTAINER_VERSION = 0.0.1
-WORKING_DIR = $(HOME_PATH)
+WORKING_DIR = $(HOME_PATH)/git/gtk
 
 .PHONY: $(CONTAINER_NAME) run
 

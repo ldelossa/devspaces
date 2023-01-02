@@ -1,4 +1,4 @@
-ARG version_id=36
+ARG version_id=37
 FROM fedora:$version_id
 
 RUN dnf install -y bat bear iproute kitty \

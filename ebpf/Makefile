@@ -2,7 +2,7 @@ include ../lib/defines
 
 CONTAINER_NAME = ebpf
 CONTAINER_VERSION = 0.0.1
-EBF_DIR = $(HOME_PATH)/git/ebpf
+WORKING_DIR = $(HOME_PATH)/git/ebpf
 
 .PHONY: $(CONTAINER_NAME) run
 

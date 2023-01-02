@@ -1,8 +1,8 @@
-include ../lib/defines
+include ./lib/defines
 
 .PHONY: rebuild
 
-DEVSPACES = "ebpf" "frr" "waybar"
+DEVSPACES = "ebpf" "frr" "waybar" "gtk"
 
 help:
 	@echo 'help:'

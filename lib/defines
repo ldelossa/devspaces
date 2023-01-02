@@ -18,8 +18,23 @@ define LIB_BUILD_IF_REQUIRED
 endef
 
 define LIB_BUILD_CONTAINER 
-docker build --build-arg version_id=$(FEDORA_VERSION_ID) -t $(CONTAINER_TAG) .
-docker tag $(CONTAINER_TAG) $(REPO_CONTAINER_NAME)
+    docker build --build-arg version_id=$(FEDORA_VERSION_ID) -t $(CONTAINER_TAG) .
+    docker tag $(CONTAINER_TAG) $(REPO_CONTAINER_NAME)
 endef 
 
+define LIB_RUN_CONTAINER_AS_USER
+	-$(RUNTIME) run -d --privileged \
+		-l devspace \
+		-v $(SYS_PATH):$(SYS_PATH) \
+		-v /etc/group:/etc/group:ro \
+		-v /etc/passwd:/etc/passwd:ro \
+		-v /etc/shadow:/etc/shadow:ro \
+		-v $(HOME_PATH):$(HOME_PATH) \
+		--user $(UID):$(GID) \
+		--name $(CONTAINER_NAME) \
+		 $(CONTAINER_TAG) 
+endef
 
+define LIB_EXEC_CONTAINER_WITH_WORKING_DIR
+	$(RUNTIME) exec -it -w $(WORKING_DIR) $(CONTAINER_NAME) zsh
+endef
