@@ -34,9 +34,10 @@ define LIB_RUN_CONTAINER_AS_USER
 		-v $(XDG_RUNTIME_DIR):$(XDG_RUNTIME_DIR) \
 		--user $(UID):$(GID) \
 		--name $(CONTAINER_NAME) \
-		 $(CONTAINER_TAG) 
+		 $(CONTAINER_TAG) &>/dev/null
 endef
 
 define LIB_EXEC_CONTAINER_WITH_WORKING_DIR
+    $(RUNTIME) start $(CONTAINER_NAME) > /dev/null
 	$(RUNTIME) exec -it --env-file <(env) -e "DEVSPACE=devspace/$(CONTAINER_NAME)" -w $(WORKING_DIR) $(CONTAINER_NAME) zsh
 endef

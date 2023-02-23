@@ -1,7 +1,7 @@
 ARG version_id=
 FROM fedora:$version_id
 
-sudo dnf install -y bat bear iproute iproute-tc kitty \
+RUN dnf install -y bat bear iproute iproute-tc kitty \
     clang clang-tools-extra exa fd-find \
     fuse-sshfs fzf htop jq nmap \
     the_silver_searcher ripgrep \
@@ -11,7 +11,7 @@ sudo dnf install -y bat bear iproute iproute-tc kitty \
     bison procs kubernetes-client helm npm \
     llvm gdb elfutils-libelf-devel openssl-devel dwarves zstd 
 
-sudo dnf copr enable agriffis/neovim-nightly; \
+RUN dnf copr enable agriffis/neovim-nightly; \
     sudo dnf install -y neovim
 
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; \
