@@ -1,6 +1,8 @@
 FROM devspace/home:latest
 
-RUN sudo dnf install -y gtk4-devel pkg-config
+# necessary depedencies to build gtk-layer-shell and gtk applications.
+RUN sudo dnf install -y gtk4-devel pkg-config gtk-layer-shell-devel \
+  wayland-protocols-devel gobject-introspection-devel vala 
 RUN mkfifo /var/run/pause; chmod 777 /var/run/pause
 
 ENTRYPOINT ["zsh"]

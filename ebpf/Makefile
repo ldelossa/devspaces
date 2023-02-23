@@ -23,4 +23,4 @@ run:
 		--user $(UID):$(GID) \
 		--name $(CONTAINER_NAME) \
 		 $(CONTAINER_TAG) 2> /dev/null
-	$(RUNTIME) exec -it -w $(EBF_DIR) $(CONTAINER_NAME) zsh
+	$(RUNTIME) exec -it -w $(WORKING_DIR) $(CONTAINER_NAME) zsh

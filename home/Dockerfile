@@ -1,18 +1,18 @@
-ARG version_id=37
+ARG version_id=
 FROM fedora:$version_id
 
-RUN dnf install -y bat bear iproute kitty \
+sudo dnf install -y bat bear iproute iproute-tc kitty \
     clang clang-tools-extra exa fd-find \
     fuse-sshfs fzf htop jq nmap \
-    the_silver_searcher \
-    zsh gh rust \
+    the_silver_searcher ripgrep \
+    zsh gh rust cmake man man-pages man-db \
     nodejs-bash-language-server \
     nnn scdoc meson flex \
     bison procs kubernetes-client helm npm \
     llvm gdb elfutils-libelf-devel openssl-devel dwarves zstd 
 
-RUN  dnf copr enable agriffis/neovim-nightly; \
-    dnf install -y neovim
+sudo dnf copr enable agriffis/neovim-nightly; \
+    sudo dnf install -y neovim
 
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; \
     ~/.fzf/install
@@ -23,9 +23,9 @@ RUN git clone https://github.com/ldelossa/dotfiles.git ~/git/dotfiles; \
 RUN git clone --recursive https://github.com/changs/slimzsh.git ~/.slimzsh
 
 RUN cd /tmp; \
-    curl -LO https://go.dev/dl/go1.19.4.linux-amd64.tar.gz; \
-    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz; \
-    rm -rf go1.19.4.linux-amd64.tar.gz
+    curl -LO https://go.dev/dl/go1.20.linux-amd64.tar.gz; \
+    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.linux-amd64.tar.gz; \
+    rm -rf go1.20.linux-amd64.tar.gz
 
 RUN cd ~/git/lua; \
     curl -LO https://github.com/sumneko/lua-language-server/releases/download/3.4.2/lua-language-server-3.4.2-linux-x64.tar.gz; \

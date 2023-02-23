@@ -23,6 +23,6 @@ rebuild:
 devspaces:
 	declare -a spaces=(${DEVSPACES}); 
 	for s in $${spaces[@]}; do 
-		(cd $$s; make)
+		(cd ~/git/devspaces/$$s; make)
 	done
 
