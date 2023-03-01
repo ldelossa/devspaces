@@ -9,7 +9,8 @@ RUN dnf install -y bat bear iproute iproute-tc kitty \
     nodejs-bash-language-server \
     nnn scdoc meson flex \
     bison procs kubernetes-client helm npm \
-    llvm gdb elfutils-libelf-devel openssl-devel dwarves zstd 
+    llvm gdb elfutils-libelf-devel openssl-devel dwarves zstd \
+    tcpdump iputils
 
 RUN dnf copr enable agriffis/neovim-nightly; \
     sudo dnf install -y neovim
