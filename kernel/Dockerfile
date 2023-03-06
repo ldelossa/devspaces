@@ -1,7 +1,8 @@
 FROM devspace/home:latest
 
 RUN dnf install -y \
-  clang libbpf libbpf-devel bpftool sshfs rsync openssh-clients perl bc diffutils
+  clang libbpf libbpf-devel bpftool sshfs rsync openssh-clients perl bc diffutils \
+  ncurses-devel
 
 RUN mkfifo /var/run/pause; chmod 777 /var/run/pause
 
