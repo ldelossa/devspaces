@@ -3,6 +3,11 @@
 p="$HOME/git/devspaces"
 
 function devspace() {
+    if [[ "$1" = "ps" ]]; then
+        devspace-ps
+        return
+    fi
+
     if [[ "$1" = "list" ]]; then
         devspace-list
         return
@@ -19,7 +24,7 @@ function devspace() {
     fi
 
     if [[ -z "$1" ]]; then
-        echo "
+        echo "devspace ps
 devspace list
 devspace stop
 devspace rm
@@ -33,7 +38,7 @@ devspace {dev container name}
     make run
 }
 
-function devspace-list() {
+function devspace-ps() {
     docker ps -a --filter=label=devspace --format "table {{.Names}}\t{{.Status}}"
 }
 
@@ -43,6 +48,15 @@ function devspace-stop() {
 
 function devspace-rm() {
     docker rm "$1"
+}
+
+function devspace-list() {
+    cd $p
+    for d in $(/bin/ls); do
+        if [[ -e $d/Dockerfile ]]; then
+            echo "$d"
+        fi
+    done
 }
 
 
