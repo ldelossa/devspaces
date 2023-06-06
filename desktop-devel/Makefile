@@ -1,6 +1,6 @@
 include ../lib/defines
 
-CONTAINER_NAME = gtk
+CONTAINER_NAME = desktop-devel
 CONTAINER_VERSION = 0.0.1
 WORKING_DIR = $(HOME_PATH)/git/gtk
 

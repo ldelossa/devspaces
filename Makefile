@@ -2,7 +2,7 @@ include ./lib/defines
 
 .PHONY: rebuild
 
-DEVSPACES = "ebpf" "frr" "waybar" "gtk"
+DEVSPACES = "ebpf" "frr" "waybar" "desktop-devel"
 
 help:
 	@echo 'help:'
