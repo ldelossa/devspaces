@@ -36,7 +36,20 @@ RUN sudo dnf install -y         \
     json-glib-devel             \
     libhandy-devel              \
     fish                        \
-    bash-completion
+    bash-completion             \
+    libdrm-devel                \
+    libseat-devel               \
+    json-c-devel                \
+    wlroots-devel               \
+    xorg-x11-server-Xwayland-devel \
+    libevdev-devel              \
+    libinput-devel              \
+    pango-devel                 \
+    libglvnd-gles               \
+    xcb-util-wm-devel           \
+    xcb-util-renderutil-devel   \
+    libseat-devel               \
+    xorg-x11-server-Xwayland-devel 
 
 RUN mkfifo /var/run/pause; chmod 777 /var/run/pause
 

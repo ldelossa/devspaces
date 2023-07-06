@@ -33,9 +33,7 @@ devspace {dev container name}
         return
     fi
 
-
-    cd "$p"/"$1" || return
-    make run
+    WORKING_DIR=$(pwd) make -C "$p"/"$1" run
 }
 
 function devspace-ps() {
