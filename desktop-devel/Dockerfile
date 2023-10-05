@@ -49,7 +49,18 @@ RUN sudo dnf install -y         \
     xcb-util-wm-devel           \
     xcb-util-renderutil-devel   \
     libseat-devel               \
-    xorg-x11-server-Xwayland-devel 
+    xorg-x11-server-Xwayland-devel \
+	gtk-doc \
+	libadwaita-devel
+
+# build and install gtk4-layer-shell v1.0.1
+RUN cd /tmp && \
+	curl -LO https://github.com/wmww/gtk4-layer-shell/archive/refs/tags/v1.0.1.tar.gz && \
+	tar -xvf v1.0.1.tar.gz && cd gtk4-layer-shell-1.0.1  && \
+	meson setup --prefix=/usr -Dexamples=true -Ddocs=true -Dtests=true build && \
+	ninja -C build/ && \
+	ninja -C build/ install
+
 
 RUN mkfifo /var/run/pause; chmod 777 /var/run/pause
 
