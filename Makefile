@@ -15,7 +15,7 @@ rebuild:
 	# remove all the devspace images
 	-$(RUNTIME) images devspace/* -q | xargs $(RUNTIME) rmi --force
 	# rebuild home which is base for all other devspace images
-	(make -C ~/git/devspace/home)
+	(make -C ~/git/devspaces/home)
 	# rebuild all devspaces
 	make devspaces
 

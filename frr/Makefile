@@ -2,7 +2,7 @@ include ../lib/defines
 
 CONTAINER_NAME = frr
 CONTAINER_VERSION = 0.0.1
-WORKING_DIR = $(HOME_PATH)/git/c/frr
+WORKING_DIR ?= $(HOME_PATH)/git/c/frr
 
 .PHONY: $(CONTAINER_NAME) run
 

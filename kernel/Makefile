@@ -2,7 +2,7 @@ include ../lib/defines
 
 CONTAINER_NAME = kernel
 CONTAINER_VERSION = 0.0.1
-WORKING_DIR = $(HOME_PATH)/git/c
+WORKING_DIR ?= $(HOME_PATH)/git/c
 
 .PHONY: $(CONTAINER_NAME) run
 

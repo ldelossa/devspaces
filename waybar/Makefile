@@ -2,7 +2,7 @@ include ../lib/defines
 
 CONTAINER_NAME = waybar
 CONTAINER_VERSION = 0.0.2
-WORKING_DIR=$(HOME_PATH)/git/cpp/Waybar
+WORKING_DIR ?= $(HOME_PATH)/git/cpp/Waybar
 
 .PHONY: $(CONTAINER_NAME) run
 
