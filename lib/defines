@@ -32,6 +32,9 @@ define LIB_RUN_CONTAINER_AS_USER
 		-v /etc/shadow:/etc/shadow:ro \
 		-v $(HOME_PATH):$(HOME_PATH) \
 		-v $(XDG_RUNTIME_DIR):$(XDG_RUNTIME_DIR) \
+		-v /var/log/journal:/var/log/journal \
+		-v /var/log/journal:/run/log/journal \
+		-v /var/lib/systemd/coredump:/var/lib/systemd/coredump \
 		--user $(UID):$(GID) \
 		--name $(CONTAINER_NAME) \
 		 $(CONTAINER_TAG) &>/dev/null
