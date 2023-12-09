@@ -51,7 +51,19 @@ RUN sudo dnf install -y         \
     libseat-devel               \
     xorg-x11-server-Xwayland-devel \
 	gtk-doc \
-	libadwaita-devel
+	libadwaita-devel \
+	gjs-devel \
+	typescript \
+	gnome-bluetooth \
+	gnome-bluetooth-libs \
+	brightnessctl \
+	inotify-tools \
+	graphviz \
+	doxygen \
+	gstreamer1-devel \
+	gstreamer1-plugins-bad-free-devel \
+	gtk-doc \
+	xmlto 
 
 # build and install gtk4-layer-shell v1.0.1
 RUN cd /tmp && \
@@ -60,7 +72,6 @@ RUN cd /tmp && \
 	meson setup --prefix=/usr -Dexamples=true -Ddocs=true -Dtests=true build && \
 	ninja -C build/ && \
 	ninja -C build/ install
-
 
 RUN mkfifo /var/run/pause; chmod 777 /var/run/pause
 
