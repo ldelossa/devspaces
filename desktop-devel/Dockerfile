@@ -25,6 +25,7 @@ RUN sudo dnf install -y         \
     wayland-devel               \
     scdoc                       \
     upower                      \
+	upower-devel				\
     libxkbcommon-devel          \
     clang                       \
     llvm                        \
@@ -63,7 +64,12 @@ RUN sudo dnf install -y         \
 	gstreamer1-devel \
 	gstreamer1-plugins-bad-free-devel \
 	gtk-doc \
-	xmlto 
+	xmlto \
+	evolution-data-server-devel \
+	mutter-devel \
+	polkit-devel \
+	startup-notification-devel
+
 
 # build and install gtk4-layer-shell v1.0.1
 RUN cd /tmp && \
