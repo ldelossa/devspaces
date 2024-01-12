@@ -68,13 +68,15 @@ RUN sudo dnf install -y         \
 	evolution-data-server-devel \
 	mutter-devel \
 	polkit-devel \
-	startup-notification-devel
+	startup-notification-devel \
+	wireplumber-devel \
+	NetworkManager-libnm-devel
 
 
 # build and install gtk4-layer-shell v1.0.1
 RUN cd /tmp && \
-	curl -LO https://github.com/wmww/gtk4-layer-shell/archive/refs/tags/v1.0.1.tar.gz && \
-	tar -xvf v1.0.1.tar.gz && cd gtk4-layer-shell-1.0.1  && \
+	curl -LO https://github.com/wmww/gtk4-layer-shell/archive/refs/tags/v1.0.2.tar.gz && \
+	tar -xvf v1.0.2.tar.gz && cd gtk4-layer-shell-1.0.2  && \
 	meson setup --prefix=/usr -Dexamples=true -Ddocs=true -Dtests=true build && \
 	ninja -C build/ && \
 	ninja -C build/ install
